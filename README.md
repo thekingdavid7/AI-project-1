@@ -1,9 +1,3 @@
-# Document converted from PDF
-
-**Total Pages:** 4
-
----
-
 ## Page 1
 
 CAP 4601 Project 1: Adversarial Search Spring 2026
