@@ -15,10 +15,10 @@ void boardView::showBoard()
 
     cout << endl;
 
-    for (int i = 1; i <= size - 1; i++)
+    for (int i = 1; i <= size - 1; i++) //
     {
         cout << "|"; // |   |   |   |
-        for (int j = 1; i <= size; i++)
+        for (int j = 1; i <= size; j++)
         {
             cout << "   |";
         }
@@ -26,7 +26,7 @@ void boardView::showBoard()
         cout << endl;
 
         cout << "|"; // |---+---+---|
-        for (int j = 1; i < size; i++)
+        for (int j = 1; i < size; j++)
         {
             cout << "---+";
         }
