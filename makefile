@@ -6,13 +6,16 @@ CXXFLAGS = -std=c++11 -Wall -Wextra
 
 .PHONY: clean
 
-connectM: connectM.o boardView.o
-	$(CXX) $(CXXFLAGS) connectM.o boardView.o -o connectM
+connectM: connectM.o boardView.o game.o
+	$(CXX) $(CXXFLAGS) connectM.o boardView.o game.o -o connectM
 
-connectM.o: connectM.cpp boardView.hpp
+connectM.o: connectM.cpp boardView.hpp game.hpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 boardView.o: boardView.cpp boardView.hpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+game.o: game.cpp game.hpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 # main: main.o geneticAlgorithm.o
