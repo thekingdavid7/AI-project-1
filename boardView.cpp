@@ -15,7 +15,7 @@ void boardView::showBoard()
 
     cout << endl;
 
-    for (int i = 1; i <= size - 1; i++)
+    for (int i = 1; i <= size - 1; i++) //
     {
         cout << "|"; // |   |   |   |
         for (int j = 1; j <= size; j++)
