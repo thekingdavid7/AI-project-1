@@ -25,13 +25,15 @@ int main(int argc, char* argv[])
     int M = stoi(argv[2]); //how many connected to win
     int H = stoi(argv[3]); //0 or 1
     
-    cout << "hello, world!" << endl;
-    cout << "N : " << N << endl;
-    cout << "M : " << M << endl;
-    cout << "H : " << H << endl;
+    // cout << "hello, world!" << endl;
+    // cout << "N : " << N << endl;
+    // cout << "M : " << M << endl;
+    // cout << "H : " << H << endl;
 
-    boardView board = boardView(N);
-    board.showBoard();
+    cout << "Welcome to Connect M!" << endl;
+
+    boardView view = boardView(N);
+    view.showBoard();
 
     return 0;
 }
