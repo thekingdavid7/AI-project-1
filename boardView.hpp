@@ -2,6 +2,7 @@
 #define BOARDVIEW_HPP
 
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -12,7 +13,7 @@ class boardView
 
     public:
         boardView(int N);
-        void showBoard();
+        void showBoard(vector<vector<char>> board);
 };
 
 #endif

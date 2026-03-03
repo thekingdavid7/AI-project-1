@@ -15,6 +15,7 @@ class game
 
     public:
         game(int N, int M);
+        vector<vector<char>> getBoard();
         void dropPiece(int player, int x);
 };
 

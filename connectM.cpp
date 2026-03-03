@@ -33,7 +33,7 @@ int main(int argc, char* argv[])
 
     boardView view = boardView(N);
     game myGame = game(N, M);
-    view.showBoard();
+    view.showBoard(myGame.getBoard());
 
     cout << "Welcome to Connect M!" << endl;
     if (H = 1)
