@@ -64,6 +64,7 @@ int main(int argc, char* argv[])
                     return 0;
                 }
             }
+            view.showBoard(myGame.getBoard());
             cout << "players's turn..." << endl;
             //myGame.dropPiece(human, choice);
             //  FIXME:
@@ -76,6 +77,7 @@ int main(int argc, char* argv[])
             //ai logic goes here
             //choice = findMove()
             //myGame.dropPiece(computer, choice);
+            view.showBoard(myGame.getBoard());
             cout << "computer's turn..." << endl;
             //  FIXME:
             //if win/tie condition, break out of loop
