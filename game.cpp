@@ -56,7 +56,7 @@ bool game::checkWin(char piece)
     return false;
 }
 
-bool gmae::checkDraw()
+bool game::checkDraw()
 {
     for (int col = 0; col < size; col++)
     {
