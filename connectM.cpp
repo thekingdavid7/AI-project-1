@@ -3,6 +3,7 @@
 
 #include "boardView.hpp"
 #include "game.hpp"
+#include "aiLogic.hpp"
 
 using namespace std;
 
@@ -17,6 +18,7 @@ int main(int argc, char* argv[])
 {
     bool playerTurn = false;
     int choice;
+    int aiChoice;
     const int human = 1;
     const int computer = 0;
 
@@ -33,10 +35,11 @@ int main(int argc, char* argv[])
 
     boardView view = boardView(N);
     game myGame = game(N, M);
+    AI ai = AI(4);
     view.showBoard(myGame.getBoard());
 
     cout << "Welcome to Connect M!" << endl;
-    if (H = 1)
+    if (H == 1)
     {
         playerTurn = true;
     }
@@ -66,21 +69,40 @@ int main(int argc, char* argv[])
             }
             view.showBoard(myGame.getBoard());
             cout << "players's turn..." << endl;
-            //myGame.dropPiece(human, choice);
-            //  FIXME:
-            //if win/tie condition, break out of loop
+            myGame.dropPiece(human, choice);
+            view.showBoard(myGame.getBoard());
+            
+            if (myGame.checkWin('X'))
+            {
+                cout << "You Win!" << endl;
+                break;
+            }
+
+            if (myGame.checkDraw())
+            {
+                cout << "Draw!" << endl;
+                break;
+            }
             playerTurn = false;
         }
         else //computer turn
         {
-            //  FIXME:
-            //ai logic goes here
-            //choice = findMove()
-            //myGame.dropPiece(computer, choice);
+            aiChoice = ai.choice(myGame, 'X', 'O');
+            myGame.dropPiece(computer, aiChoice);
             view.showBoard(myGame.getBoard());
             cout << "computer's turn..." << endl;
-            //  FIXME:
-            //if win/tie condition, break out of loop
+
+            if (myGame.checkWin('O'))
+            {
+                cout << "Computer Wins!" << endl;
+                break;
+            }
+
+            if (myGame.checkDraw())
+            {
+                cout << "Draw!" << endl;
+                break;
+            }
             playerTurn = true;
         }
     }
