@@ -67,7 +67,6 @@ int main(int argc, char* argv[])
                     return 0;
                 }
             }
-            view.showBoard(myGame.getBoard());
             cout << "players's turn..." << endl;
             myGame.dropPiece(human, choice);
             view.showBoard(myGame.getBoard());
@@ -89,8 +88,8 @@ int main(int argc, char* argv[])
         {
             aiChoice = ai.choice(myGame, 'X', 'O');
             myGame.dropPiece(computer, aiChoice);
-            view.showBoard(myGame.getBoard());
             cout << "computer's turn..." << endl;
+            view.showBoard(myGame.getBoard());
 
             if (myGame.checkWin('O'))
             {
