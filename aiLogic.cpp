@@ -213,7 +213,7 @@ int AI::evaluate(vector<vector<char>> board, int N, int M)
 
         if (board[row][center] == humanToken)
         {
-            total; -=3;
+            total -=3;
         }
     }
 

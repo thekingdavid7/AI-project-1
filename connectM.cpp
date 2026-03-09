@@ -35,8 +35,7 @@ int main(int argc, char* argv[])
 
     boardView view = boardView(N);
     game myGame = game(N, M);
-    // Fill in once constructor is designed.
-    // aiLogic ai = 
+    AI ai = AI(4);
     view.showBoard(myGame.getBoard());
 
     cout << "Welcome to Connect M!" << endl;
@@ -88,7 +87,7 @@ int main(int argc, char* argv[])
         }
         else //computer turn
         {
-            aiChoice = ai.choice(game);
+            aiChoice = ai.choice(myGame, 'X', 'O');
             myGame.dropPiece(computer, aiChoice);
             view.showBoard(myGame.getBoard());
             cout << "computer's turn..." << endl;

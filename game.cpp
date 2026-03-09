@@ -89,3 +89,12 @@ bool game::checkDirection(int row, int col, int dRow, int dCol, char piece)
     return true;
 }
 
+int game::getSize()
+{
+    return size;
+}
+
+int game::getWinState()
+{
+    return winState;
+}

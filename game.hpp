@@ -20,7 +20,8 @@ class game
         void dropPiece(int player, int x);
         bool checkDraw();
         bool checkWin(char piece);
-
+        int getSize();
+        int getWinState();
 };
 
 #endif
