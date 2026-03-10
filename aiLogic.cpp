@@ -23,14 +23,14 @@ int AI::choice(game& currentState, char humanToken, char aiToken)
 
     for (int col = 0; col < N; col++)
     {
-        if (!isColPlayable(board, col, N))
+        if (!isColPlayable(board, col)) //if column is full, skip
         {
             continue;
         }
 
-        vector<vector<char>> next = board;
-        applyMove(next, col, N, aiToken);
-        int score = search(next, N, M, maxDepth - 1, numeric_limits<int>::min(), numeric_limits<int>::max(), false);
+        vector<vector<char>> next = board; //copy board
+        applyMove(next, col, N, aiToken); //drop a piece in column
+        int score = search(next, N, M, maxDepth - 1, numeric_limits<int>::min(), numeric_limits<int>::max(), false); //search resulting board state and get score
         if (score > bestScore)
         {
             bestScore = score;
@@ -42,19 +42,21 @@ int AI::choice(game& currentState, char humanToken, char aiToken)
 
 int AI::search(vector<vector<char>> board, int N, int M, int depth, int alpha, int beta, bool isMax)
 {
-    if (checkWin(board, N, M, aiToken))
+    //min max algorithm with alpha beta pruning
+    if (checkWin(board, N, M, aiToken)) //if ai wins, return high score
     {
         return 1000000 + depth;
     }
 
-    if (checkWin(board, N, M, humanToken))
+    if (checkWin(board, N, M, humanToken)) //if human wins, return low score
     {
         return -1000000 - depth;
     }
 
-    if (isFull(board, N) || depth == 0)
+    if (isFull(board, N) || depth == 0) //if draw or depth limit reached, return evaluation of board state
     {
-        return evaluate(board, N, M);
+        //depth is added to score to prefer faster wins and slower losses
+        return evaluate(board, N, M); //the evaluate function will return a score based on how favorable the board state is for the ai, with higher scores being better for the ai and lower scores being better for the human
     }
 
     if (isMax)
@@ -62,7 +64,7 @@ int AI::search(vector<vector<char>> board, int N, int M, int depth, int alpha, i
         int best = numeric_limits<int>::min();
         for (int col = 0; col < N; col++)
         {
-            if (!isColPlayable(board, col, N))
+            if (!isColPlayable(board, col))
             {
                 continue;
             }
@@ -86,7 +88,7 @@ int AI::search(vector<vector<char>> board, int N, int M, int depth, int alpha, i
 
         for (int col = 0; col < N; col++)
         {
-            if (!isColPlayable(board, col, N))
+            if (!isColPlayable(board, col))
             {
                 continue;
             }
@@ -104,14 +106,14 @@ int AI::search(vector<vector<char>> board, int N, int M, int depth, int alpha, i
     }
 }
 
-bool AI::isColPlayable(vector<vector<char>> board, int col, int N)
+bool AI::isColPlayable(vector<vector<char>> board, int col)
 {
     return board[0][col] == ' ';
 }
 
 void AI::applyMove(vector<vector<char>>& board, int col, int N, char piece)
 {
-    for (int row = N - 1; row >= 0; row--)
+    for (int row = N - 1; row >= 0; row--) //start from bottom of column and find first empty space to drop piece
     {
         if (board[row][col] == ' ')
         {
@@ -184,6 +186,7 @@ int AI::evaluate(vector<vector<char>> board, int N, int M)
                 vector<char> window;
                 for (int i = 0; i < M; i++)
                 {
+                    //these calculations will get the row and column of each piece in the window based on the starting position and direction, and add the piece to the window vector if it is within bounds
                     int r = row + i * directions[dirIndex][0];
                     int c = col + i * directions[dirIndex][1];
 
@@ -192,7 +195,7 @@ int AI::evaluate(vector<vector<char>> board, int N, int M)
                         break;
                     }
 
-                    window.push_back(board[r][c]);
+                    window.push_back(board[r][c]); //add piece to window
                 }
 
                 if ((int)window.size() == M)
@@ -206,6 +209,7 @@ int AI::evaluate(vector<vector<char>> board, int N, int M)
     int center = N / 2;
     for (int row = 0; row < N; row++)
     {
+        //the center column is more valuable because it allows for more potential winning combinations, so we will add points for ai pieces in the center column and subtract points for human pieces in the center column
         if (board[row][center] == aiToken)
         {
             total += 3;
@@ -220,6 +224,7 @@ int AI::evaluate(vector<vector<char>> board, int N, int M)
     return total;
 }
 
+//returns score
 int AI::scoreWindow(vector<char> window, int M, char piece)
 {
     int pieceCount = 0;
@@ -241,12 +246,12 @@ int AI::scoreWindow(vector<char> window, int M, char piece)
 
     if (pieceCount == M)
     {
-        return 100000;
+        return 100000; //ai win
     }
 
     if (oppCount == M)
     {
-        return -100000;
+        return -100000; //human win
     }
 
     if (pieceCount == M - 1 && emptyCount == 1)

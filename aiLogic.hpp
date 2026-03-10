@@ -12,7 +12,7 @@ class AI
         int maxDepth;
         char humanToken;
         char aiToken;
-        bool isColPlayable(vector<vector<char>> board, int col, int N);
+        bool isColPlayable(vector<vector<char>> board, int col);
         void applyMove(vector<vector<char>>& board, int col, int N, char piece);
         bool checkWin(vector<vector<char>> board, int N, int M, char piece);
         bool isFull(vector<vector<char>> board, int N);
